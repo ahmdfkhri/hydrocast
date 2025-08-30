@@ -1,5 +1,5 @@
 # 🌊 Hydrocast  
-![status](https://img.shields.io/badgestatus-work%20in%20progress-yellow)
+![status](https://img.shields.io/badge/status-work%20in%20progress-yellow)
 One-stop solution for **fish pond monitoring** and **water quality forecasting**.
 
 ---
