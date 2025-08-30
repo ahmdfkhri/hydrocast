@@ -8,11 +8,11 @@ One-stop solution for **fish pond monitoring** and **water quality forecasting**
 ---
 
 ## 📦 Dependencies
-- **Go** v1.25.0  
+- **[Go](https://go.dev/)** v1.25.0 
   - [Goose](https://github.com/pressly/goose) v3.25.0 – Pure Go migration tool  
   - [Protoc](https://grpc.io/docs/protoc-installation/) v28.3 – Protobuf generation tool  
-- **PostgreSQL** 17.6  
-- **OpenSSL** 3.2.1  
+- **[PostgreSQL](https://www.postgresql.org/)** v17.6  
+- **[OpenSSL](https://github.com/openssl/openssl)** 3.2.1  
 
 ---
 
