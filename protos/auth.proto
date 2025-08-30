@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package hydrocast;
+
+option go_package = "/pb";
+
+import "google/protobuf/empty.proto";
+
+service Auth {
+  rpc Login (LoginRequest) returns (LoginResponse);
+  rpc Signup (SignupRequest) returns (SignupResponse);
+  rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenResponse);
+  rpc GetProfile (google.protobuf.Empty) returns (GetProfileResponse);
+}
+
+message LoginRequest {
+  string username_or_email = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+}
+
+message SignupRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message SignupResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+}
+
+message RefreshTokenRequest {
+  string refresh_token = 1;
+}
+
+message RefreshTokenResponse {
+  string access_token = 1;
+  optional string refresh_token = 2;
+}
+
+message GetProfileResponse {
+  string id = 1;
+  string username = 2;
+  string email = 3;
+  string role = 4;
+}

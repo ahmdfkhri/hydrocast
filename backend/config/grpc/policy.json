@@ -1,0 +1,58 @@
+{
+  "name": "authz",
+  "allow_rules": [
+    {
+      "name": "allow_PublicEndpoints",
+      "request": {
+        "paths": [
+          "/hydrocast.Auth/Login",
+          "/hydrocast.Auth/Signup",
+          "/hydrocast.Auth/RefreshToken"
+        ]
+      }
+    },
+    {
+      "name": "allow_Authenticated",
+      "request": {
+        "paths": [
+          "/hydrocast.Auth/GetProfile"
+        ],
+        "headers": [
+          {
+            "key": "user_role",
+            "values": ["user", "admin"]
+          }
+        ]
+      }
+    },
+    {
+      "name": "allow_User",
+      "request": {
+        "paths": [
+          ""
+        ],
+        "headers": [
+          {
+            "key": "user_role",
+            "values": ["user"]
+          }
+        ]
+      }
+    },
+    {
+      "name": "allow_Admin",
+      "request": {
+        "paths": [
+          ""
+        ],
+        "headers": [
+          {
+            "key": "user_role",
+            "values": ["admin"]
+          }
+        ]
+      }
+    }
+  ],
+  "deny_rules": []
+}
