@@ -1,5 +1,8 @@
 # 🌊 Hydrocast  
 ![status](https://img.shields.io/badge/status-work%20in%20progress-yellow)
+
+> 🚧 **Work in Progress**: This project is under active development. Expect changes and improvements.  
+
 One-stop solution for **fish pond monitoring** and **water quality forecasting**.
 
 ---
