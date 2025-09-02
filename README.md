@@ -56,6 +56,12 @@ Run the seeder to create the first admin:
 make seed
 ```
 
+### 5. Generate TLS
+When in development, run:  
+```bash
+make dev-cert
+```
+
 ---
 
 ✅ You’re ready to run **Hydrocast**!

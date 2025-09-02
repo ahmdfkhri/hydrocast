@@ -13,7 +13,7 @@ import (
 type Config struct {
 	DatabaseConfig
 	JWTConfig
-	GRPCConfig
+	ServerConfig
 	AdminConfig
 }
 
@@ -31,8 +31,10 @@ type JWTConfig struct {
 	ReRefreshDuration time.Duration
 }
 
-type GRPCConfig struct {
-	Port int
+type ServerConfig struct {
+	Host          string
+	GRPCPort      int
+	DashboardPort int
 }
 
 type AdminConfig struct {
@@ -61,8 +63,10 @@ func New() *Config {
 			},
 			ReRefreshDuration: getEnvAsDuration("JWT_REREFRESH_DURATION", 24*time.Hour),
 		},
-		GRPCConfig{
-			Port: getEnvAsInt("GRPC_PORT", 50051),
+		ServerConfig{
+			Host:          getEnv("SERVER_HOST", "127.0.0.1"),
+			GRPCPort:      getEnvAsInt("SERVER_GRPC_PORT", 50051),
+			DashboardPort: getEnvAsInt("SERVER_DASHBOARD_PORT", 8080),
 		},
 		AdminConfig{
 			Username: getEnv("ADMIN_USERNAME", "admin"),

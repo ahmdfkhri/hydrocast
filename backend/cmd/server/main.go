@@ -15,21 +15,23 @@ import (
 	"github.com/ahmdfkhri/hydrocast/backend/pkg/pb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/reflection"
 )
 
 func main() {
 	// Get environtment variables
 	cfg := config.New()
 
-	// Try to listen on GRPC_PORT
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%v", cfg.GRPCConfig.Port))
+	// Try to listen on gRPC port
+	addr := fmt.Sprintf("%s:%d", cfg.ServerConfig.Host, cfg.ServerConfig.GRPCPort)
+	lis, err := net.Listen("tcp", addr)
 	if err != nil {
-		log.Fatalf("Listening on local port %q: %v", cfg.GRPCConfig.Port, err)
+		log.Fatalf("Listening on %s -> %v", addr, err)
 	}
 
 	// Create TLS-based credentials
-	creds, err := credentials.NewServerTLSFromFile(filepath.Join("config", "x509", "server.crt"), filepath.Join("config", "x509", "server.key"))
+	certPath := filepath.Join("config", "x509", "server.crt")
+	keyPath := filepath.Join("config", "x509", "server.key")
+	creds, err := credentials.NewServerTLSFromFile(certPath, keyPath)
 	if err != nil {
 		log.Fatalf("Loading credentials: %v", err)
 	}
@@ -61,10 +63,7 @@ func main() {
 	// Register services
 	pb.RegisterAuthServer(s, authServer)
 
-	// register reflection for testing
-	reflection.Register(s)
-
-	log.Printf("Serving on :%v\n", cfg.GRPCConfig.Port)
+	log.Printf("Serving on %v\n", addr)
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("Serving Echo service on local port: %v", err)
 	}

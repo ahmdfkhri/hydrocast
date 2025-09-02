@@ -87,7 +87,7 @@ func AuthInterceptors(a *auth.Authorizer) (grpc.UnaryServerInterceptor, grpc.Str
 func AuthzInterceptors() (grpc.UnaryServerInterceptor, grpc.StreamServerInterceptor) {
 	fw, err := authz.NewFileWatcher(filepath.Join("config", "grpc", "policy.json"), 100*time.Millisecond)
 	if err != nil {
-		log.Fatalf("Creating a static authz interceptor: %v", err)
+		log.Fatalf("Failed loading file watcher authz policy: %v", err)
 	}
 	log.Printf("Using file watcher authz policy at %v\n", filepath.Join("config", "grpc", "policy.json"))
 	return fw.UnaryInterceptor, fw.StreamInterceptor
